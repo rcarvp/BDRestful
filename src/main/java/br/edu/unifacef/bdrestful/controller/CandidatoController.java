@@ -2,9 +2,7 @@ package br.edu.unifacef.bdrestful.controller;
 
 import br.edu.unifacef.bdrestful.model.Candidato;
 import br.edu.unifacef.bdrestful.service.CandidatoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,17 @@ public class CandidatoController {
         return candidatoService.listaCandidatos();
     }
 
+    // método que adiciona um candidato ao banco de dados
+    @PostMapping
+    public Candidato addCandidato(@RequestBody Candidato candidato){
+        return candidatoService.addCandidato(candidato);
+    }
 
+    // método que remove por id um candidato do banco de dados
+    @DeleteMapping("/{id}")
+    public String removeCandidato(@PathVariable Long id){
+        return (candidatoService.removeCandidato(id)) ?
+            "Candidato removido com sucesso" :
+            "Candidato não encontrado";
+    }
 }
