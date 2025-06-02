@@ -1,9 +1,6 @@
 package br.edu.unifacef.bdrestful.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -15,16 +12,10 @@ public class Candidato {
     private String nome, endereco, cidade;
     private Date niver;
 
-    public Candidato(Long id, String nome, String endereco, String cidade, Date niver) {
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.cidade = cidade;
-        this.niver = niver;
-    }
-
-    public Candidato() {
-    }
+    // associação com o formulário
+    @ManyToOne
+    @JoinColumn(name = "formulario_id")
+    private Formulario formulario;
 
     public Long getId() {
         return id;
@@ -64,5 +55,13 @@ public class Candidato {
 
     public void setNiver(Date niver) {
         this.niver = niver;
+    }
+
+    public Formulario getFormulario() {
+        return formulario;
+    }
+
+    public void setFormulario(Formulario formulario) {
+        this.formulario = formulario;
     }
 }

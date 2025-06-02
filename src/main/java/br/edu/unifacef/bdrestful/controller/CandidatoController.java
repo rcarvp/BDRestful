@@ -5,6 +5,7 @@ import br.edu.unifacef.bdrestful.service.CandidatoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/candidato")
@@ -33,5 +34,17 @@ public class CandidatoController {
         return (candidatoService.removeCandidato(id)) ?
             "Candidato removido com sucesso" :
             "Candidato não encontrado";
+    }
+    // método que atualiza a partir de um id e um novo candidato
+    @PutMapping("/{id}")
+    public Optional<Candidato> atualizaCandidato(@PathVariable Long id,
+                                                 @RequestBody Candidato novo){
+        return candidatoService.atualizaCandidato(id, novo);
+    }
+
+    // get com outro endpoint
+    @GetMapping("/{id}")
+    public Optional<Candidato> encontrarCandidato(@PathVariable Long id){
+        return candidatoService.encontrarCandidato(id);
     }
 }
